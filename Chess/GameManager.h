@@ -9,6 +9,7 @@ using std::vector;
 
 class GameManager
 {
+public:
 	
 	vector<Player*> players;
 	int current_player = 0;
@@ -16,7 +17,6 @@ class GameManager
 	Viewer viewer;
 	GameSetting setting;
 
-public:
 	GameManager();
 	~GameManager();
 	void start();
