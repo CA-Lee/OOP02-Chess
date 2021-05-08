@@ -13,5 +13,6 @@ public:
 	~Viewer();
 
 	void render_board();
+	void render_main();
 };
 

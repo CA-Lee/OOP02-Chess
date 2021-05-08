@@ -20,5 +20,7 @@ public:
 	GameManager();
 	~GameManager();
 	void start();
+	void start_game();
+	void game_over();
 };
 

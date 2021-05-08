@@ -154,6 +154,17 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="Viewer.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="resources\background.png" />
+    <Image Include="resources\bishop_black.png" />
+    <Image Include="resources\bishop_white.png" />
+    <Image Include="resources\board.png" />
+    <Image Include="resources\knight_black.png" />
+    <Image Include="resources\knight_white.png" />
+    <Image Include="resources\pawn_white.png" />
+    <Image Include="resources\rook_black.png" />
+    <Image Include="resources\rook_white.png" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

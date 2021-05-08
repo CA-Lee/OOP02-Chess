@@ -54,4 +54,33 @@
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="resources\background.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resources\bishop_black.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resources\bishop_white.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resources\board.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resources\knight_black.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resources\knight_white.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resources\pawn_white.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resources\rook_black.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resources\rook_white.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
 </Project>

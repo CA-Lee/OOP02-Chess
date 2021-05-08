@@ -4,11 +4,14 @@
 #include "Viewer.h"
 #include "GameManager.h"
 
+using std::cin;
 using std::cout;
 using std::endl;
 using std::string;
 
-Viewer::Viewer() {}
+Viewer::Viewer() {
+	game_manager = nullptr;
+}
 
 Viewer::Viewer(GameManager* gm_from) {
 	game_manager = gm_from;
@@ -57,5 +60,13 @@ void Viewer::render_board() {
 			cout << board[i][j] << " ";
 		}
 		cout << endl;
+	}
+}
+
+void Viewer::render_main() {
+	string a;
+	while (cin>>a)
+	{
+
 	}
 }
