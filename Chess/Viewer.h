@@ -18,6 +18,7 @@ public:
 
 	void render_sf();
 	void render_gf();
+	void render_ef(Player*);
 
 	void render_board();
 	void render_game_status();

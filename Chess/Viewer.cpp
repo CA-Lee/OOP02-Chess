@@ -35,7 +35,6 @@ void Viewer::render_sf() {
 	cout << "Press Enter to start.";
 	string a;
 	getline(cin ,a);
-	game_manager->start_game(GameMode::p2p);
 }
 
 void Viewer::render_board() {
@@ -199,4 +198,13 @@ PieceType Viewer::ask_promote() {
 		}
 		cout << "Invalid input." << endl;
 	}
+}
+
+void Viewer::render_ef(Player* winner) {
+	clear();
+	reset();
+	cout << winner->name << " win." << endl
+		<< "Press enter to return to menu.";
+	string a;
+	getline(cin, a);
 }

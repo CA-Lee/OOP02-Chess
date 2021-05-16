@@ -12,7 +12,11 @@ GameManager::~GameManager() {
 }
 
 void GameManager::start() {
-	viewer.render_sf();
+	while (true)
+	{
+		viewer.render_sf();
+		start_game(GameMode::p2p);
+	}
 }
 
 void GameManager::start_game(GameMode mode) {
@@ -23,10 +27,20 @@ void GameManager::start_game(GameMode mode) {
 	}
 
 	stage = Team::White;
+	Team winner;
 	while (1) {
 		viewer.render_gf();
 		
 		Move move = players[stage]->OnMove();
+
+		// check win
+		if (board.at(move.to) != nullptr && board.at(move.to)->piece_type == PieceType::King) {
+			board.move_piece(move);
+			viewer.render_gf();
+			winner = stage;
+			break;
+		}
+
 		board.move_piece(move);
 
 		// check promote
@@ -42,9 +56,11 @@ void GameManager::start_game(GameMode mode) {
 
 		stage = (stage == Team::White ? Team::Black : Team::White);
 	}
+	game_over(winner);
 }
 
-void GameManager::game_over() {
+void GameManager::game_over(Team win) {
 	// load end frame
 	// show game result
+	viewer.render_ef(players[win]);
 }

@@ -27,6 +27,6 @@ public:
 	~GameManager();
 	void start();
 	void start_game(GameMode);
-	void game_over();
+	void game_over(Team);
 };
 
