@@ -9,6 +9,6 @@ Move HumanPlayer::OnMove() {
 	return game_manager->viewer.get_move();
 }
 
-void HumanPlayer::OnPromote() {
-
+PieceType HumanPlayer::OnPromote() {
+	return game_manager->viewer.ask_promote();
 }

@@ -17,7 +17,7 @@ public:
 	Player(GameManager* gm) { game_manager = gm; }
 	~Player() {}
 	virtual Move OnMove() = 0;
-	virtual void OnPromote() = 0;
+	virtual PieceType OnPromote() = 0;
 };
 
 
@@ -25,5 +25,5 @@ class HumanPlayer :public Player {
 public:
 	HumanPlayer(GameManager*, string);
 	Move OnMove() override;
-	void OnPromote() override;
+	PieceType OnPromote() override;
 };

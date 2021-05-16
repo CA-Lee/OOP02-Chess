@@ -184,3 +184,20 @@ void Viewer::clear() {
 void Viewer::reset() {
 	cout << rang::style::reset << rang::fg::reset << rang::bg::reset;
 }
+
+PieceType Viewer::ask_promote() {
+	while (true)
+	{
+		cout << "Select character to promote to: (KQBNR)" << endl;
+		string promote;
+		cin >> promote;
+		if (promote.size() == 1) {
+			if (promote == "K")return PieceType::King;
+			if (promote == "Q")return PieceType::Queen;
+			if (promote == "B")return PieceType::Bishop;
+			if (promote == "N")return PieceType::Knight;
+			if (promote == "R")return PieceType::Rook;
+		}
+		cout << "Invalid input." << endl;
+	}
+}

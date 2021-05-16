@@ -23,5 +23,6 @@ public:
 	void render_game_status();
 
 	Move get_move();
+	PieceType ask_promote();
 };
 
