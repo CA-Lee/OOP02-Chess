@@ -30,34 +30,3 @@ Board::Board() {
 	}
 
 }
-
-Piece* Board::at(Position pos) {
-
-	for (auto& team : pieces) {
-		for (auto& p : team.second) {
-			if (p.position == pos)
-				return &p;
-		}
-	}
-	return nullptr;
-}
-
-bool Board::validate_move(Move move) {
-	//
-	return true;
-}
-
-void Board::move_piece(Move move) {
-	if (at(move.to) != nullptr)kill(at(move.to));
-	at(move.from)->position = move.to;
-}
-
-void Board::kill(Piece* killee) {
-	for (int i = 0; i < pieces[killee->team].size();i++){
-		if (&pieces[killee->team][i] == killee) {
-			pieces[killee->team].erase(
-				pieces[killee->team].begin() + i
-			);
-		}
-	}
-}

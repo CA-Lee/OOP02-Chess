@@ -15,6 +15,9 @@ public:
     ChessGUI(QWidget *parent = nullptr);
     ~ChessGUI();
 
+private slots:
+    void on_StartButton_clicked();
+
 private:
     Ui::ChessGUI *ui;
 };

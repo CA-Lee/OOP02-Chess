@@ -13,3 +13,9 @@ ChessGUI::~ChessGUI()
     delete ui;
 }
 
+
+void ChessGUI::on_StartButton_clicked()
+{
+
+}
+

@@ -142,11 +142,13 @@
     <ClCompile Include="Board.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="GameSetting.cpp" />
+    <ClCompile Include="HumanPlayer.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Piece.cpp" />
     <ClCompile Include="Viewer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\rang-master\include\rang.hpp" />
     <ClInclude Include="Board.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="GameSetting.h" />

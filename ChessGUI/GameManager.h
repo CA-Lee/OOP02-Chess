@@ -1,22 +1,17 @@
 #pragma once
-#include <map>
+#include <vector>
 #include "Player.h"
 #include "Board.h"
 #include "Viewer.h"
 #include "GameSetting.h"
 
-using std::map;
-
-enum class GameMode {
-	p2p,
-	p2a
-};
+using std::vector;
 
 class GameManager
 {
 public:
 	
-	map<Team, Player*> players;
+	vector<Player*> players;
 	int current_player = 0;
 	Board board;
 	Viewer viewer;
@@ -24,8 +19,8 @@ public:
 
 	GameManager();
 	~GameManager();
-	void start();
-	void start_game(GameMode);
+    int start();
+	void start_game();
 	void game_over();
 };
 

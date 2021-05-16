@@ -8,7 +8,16 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D719D998-59AC-41FC-B0C3-115CB9E18B24}"
 	ProjectSection(SolutionItems) = preProject
 		..\.gitignore = ..\.gitignore
+		..\ChessGUI\.gitignore = ..\ChessGUI\.gitignore
+		..\ChessGUI\resources\background.png = ..\ChessGUI\resources\background.png
+		..\ChessGUI\chess.qrc = ..\ChessGUI\chess.qrc
+		..\ChessGUI\chessgui.cpp = ..\ChessGUI\chessgui.cpp
+		..\ChessGUI\chessgui.h = ..\ChessGUI\chessgui.h
+		..\ChessGUI\ChessGUI.pro = ..\ChessGUI\ChessGUI.pro
+		..\ChessGUI\ChessGUI.pro.user = ..\ChessGUI\ChessGUI.pro.user
+		..\ChessGUI\chessgui.ui = ..\ChessGUI\chessgui.ui
 		..\LICENSE = ..\LICENSE
+		..\ChessGUI\main.cpp = ..\ChessGUI\main.cpp
 		..\Project2-Chess.pdf = ..\Project2-Chess.pdf
 		..\README.md = ..\README.md
 	EndProjectSection

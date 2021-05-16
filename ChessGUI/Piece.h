@@ -21,10 +21,6 @@ struct Position {
 
 	Position();
 	Position(int, int);
-
-	bool operator == (Position b) {
-		return (col == b.col && row == b.row);
-	}
 };
 
 class Piece

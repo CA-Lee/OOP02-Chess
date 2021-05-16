@@ -1,11 +1,6 @@
-#include "chessgui.h"
+#include "GameManager.h"
 
-#include <QApplication>
-
-int main(int argc, char *argv[])
-{
-    QApplication a(argc, argv);
-    ChessGUI w;
-    w.show();
-    return a.exec();
+int main() {
+    GameManager game;
+    return game.start();
 }

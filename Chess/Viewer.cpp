@@ -3,11 +3,14 @@
 #include <string>
 #include "Viewer.h"
 #include "GameManager.h"
+#include "../rang-master/include/rang.hpp"
+#include <Windows.h>
 
 using std::cin;
 using std::cout;
 using std::endl;
 using std::string;
+using std::getline;
 
 Viewer::Viewer() {
 	game_manager = nullptr;
@@ -21,52 +24,156 @@ Viewer::~Viewer() {
 
 }
 
-void Viewer::render_board() {
-	cout << "render board" << endl;
-	char board[8][8];
+void Viewer::render_gf(Team stage) {
+	clear();
 
-	for (int i = 0; i < 64; i++)board[i/8][i%8] = ' ';
-	
-	for (auto& team : game_manager->board.pieces) {
-		for (auto& p : team.second) {
-			int row = p.position.row - 1;
-			int col = p.position.col - 1;
-			switch (p.piece_type)
-			{
-			case PieceType::King:
-				board[row][col] = 'K';
-				break;
-			case PieceType::Queen:
-				board[row][col] = 'Q';
-				break;
-			case PieceType::Bishop:
-				board[row][col] = 'B';
-				break;
-			case PieceType::Knight:
-				board[row][col] = 'K';
-				break;
-			case PieceType::Rook:
-				board[row][col] = 'R';
-				break;
-			case PieceType::Pawn:
-				board[row][col] = 'P';
-				break;
-			}
-		}
-	}
-
-	for (int i = 0; i < 8; i++) {
-		for (int j = 0; j < 8; j++) {
-			cout << board[i][j] << " ";
-		}
-		cout << endl;
-	}
+	render_board();
+	render_game_status(stage);
 }
 
-void Viewer::render_main() {
+void Viewer::render_sf() {
+	cout << "Press Enter to continue.";
 	string a;
-	while (cin>>a)
-	{
+	getline(cin ,a);
+	game_manager->start_game(GameMode::p2p);
+}
 
+void Viewer::render_board() {
+	auto dark_bg = rang::bg::blue;
+	auto bright_bg = rang::bg::yellow;
+
+	cout << rang::style::reversed << " ";
+	for (char i = 'a'; i <= 'h'; i++)cout << "  " << i << "  ";
+	cout << " " << rang::style::reset << endl;
+
+	for (int i = 7; i >= 0; i--) {
+		reset();
+		cout << rang::style::reversed << " ";
+		reset();
+
+		for (int j = 0; j < 8; j++) {
+			(i & 1) == (j & 1) ?
+				cout << dark_bg :
+				cout << bright_bg;
+			cout << "     ";
+		}
+		reset();
+		cout << rang::style::reversed << " ";
+		reset();
+
+		cout << endl;
+
+		reset();
+		cout << rang::style::reversed << i + 1;
+		reset();
+		for (int j = 0; j < 8; j++) {
+			(i & 1) == (j & 1) ?
+				cout << dark_bg :
+				cout << bright_bg;
+			Piece* piece = game_manager->board.at(Position(i + 1, j + 1));
+			if (piece != nullptr) {
+				cout << "  ";
+
+				reset();
+				if (piece->team == Team::White) cout << rang::style::reversed;
+				switch (piece->piece_type)
+				{
+				case PieceType::King:
+					cout << 'K';
+					break;
+				case PieceType::Queen:
+					cout << 'Q';
+					break;
+				case PieceType::Bishop:
+					cout << 'B';
+					break;
+				case PieceType::Knight:
+					cout << 'N';
+					break;
+				case PieceType::Rook:
+					cout << 'R';
+					break;
+				case PieceType::Pawn:
+					cout << 'P';
+					break;
+				}
+				reset();
+				(i & 1) == (j & 1) ?
+					cout << dark_bg :
+					cout << bright_bg;
+				cout << "  ";
+			}
+			else
+			{
+				cout << "     ";
+			}
+		}
+
+		reset();
+		cout << rang::style::reversed << i + 1;
+		reset();
+
+		cout << endl;
+
+		reset();
+		cout << rang::style::reversed << " ";
+		reset();
+		for (int j = 0; j < 8; j++) {
+			(i & 1) == (j & 1) ?
+				cout << dark_bg :
+				cout << bright_bg;
+			cout << "     ";
+		}
+		reset();
+		cout << rang::style::reversed << " ";
+		reset();
+
+		cout << endl;
 	}
+
+	cout << rang::style::reversed << " ";
+	for (char i = 'a'; i <= 'h'; i++)cout << "  " << i << "  ";
+	cout << " " << rang::style::reset << endl;
+
+
+	reset();
+}
+
+void Viewer::render_game_status(Team stage) {
+	cout << "It's " 
+		<< (stage == Team::White ? "white" : "black")
+		<< "'s turn" << endl;
+}
+
+Move Viewer::get_move() {
+	while (true) {
+		cout << "Enter a move (eg. e3 b3)" << endl;
+		string from, to;
+		cin >> from >> to;
+		if (from.size() != 2 || to.size() != 2 ||
+			!(from[0] >= 'a' && from[0] <= 'h') ||
+			!(from[1] >= '1' && from[1] <= '8') ||
+			!(to[0] >= 'a' && to[0] <= 'h') ||
+			!(to[1] >= '1' && to[1] <= '8')
+			) {
+			cout << "Invalid input." << endl;
+		}
+
+		Move m(
+			Position(from[1] - '0', from[0] - 'a' + 1),
+			Position(to[1] - '0', to[0] - 'a' + 1)
+		);
+
+		if (game_manager->board.validate_move(m))return m;
+		else cout << "Invalid move." << endl;
+	} 
+}
+
+
+void Viewer::clear() {
+	cout << "\x1B[2J\x1B[H";
+}
+
+void Viewer::reset() {
+	cout << rang::style::reset << rang::fg::reset << rang::bg::reset;
 }

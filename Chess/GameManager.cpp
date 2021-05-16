@@ -1,25 +1,37 @@
 #include "GameManager.h"
 
 GameManager::GameManager() {
-	players = vector<Player*>(2);
+	players = map<Team, Player*>();
 	viewer = Viewer(this);
 	board = Board();
 }
 
 GameManager::~GameManager() {
-	delete players[0];
-	delete players[1];
+	delete players[Team::White];
+	delete players[Team::Black];
 }
 
 void GameManager::start() {
-	// load main frame
-	viewer.render_main();
+	viewer.render_sf();
 }
 
-void GameManager::start_game() {
-	// start game loop
-	// load game frame
-	viewer.render_board();
+void GameManager::start_game(GameMode mode) {
+
+	if (mode == GameMode::p2p) {
+		players[Team::White] = new HumanPlayer(this, "Player1");
+		players[Team::Black] = new HumanPlayer(this, "Player2");
+	}
+
+	Team stage = Team::White;
+	while (1) {
+		viewer.render_gf(stage);
+		
+		board.move_piece(players[stage]->OnMove());
+
+		// check situation
+
+		stage = (stage == Team::White ? Team::Black : Team::White);
+	}
 }
 
 void GameManager::game_over() {

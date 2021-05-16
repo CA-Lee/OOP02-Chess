@@ -9,10 +9,21 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    Board.cpp \
+    GameManager.cpp \
+    GameSetting.cpp \
+    Piece.cpp \
+    Viewer.cpp \
     main.cpp \
     chessgui.cpp
 
 HEADERS += \
+    Board.h \
+    GameManager.h \
+    GameSetting.h \
+    Piece.h \
+    Player.h \
+    Viewer.h \
     chessgui.h
 
 FORMS += \
@@ -24,4 +35,9 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 RESOURCES += \
+    chess.qrc \
     chess.qrc
+
+DISTFILES += \
+    .gitignore \
+    ChessGUI.pro.user

@@ -1,11 +1,14 @@
 #pragma once
-#include "Player.h"
+#include <QApplication>
+#include "chessgui.h"
 
 class GameManager;
 
 class Viewer
 {
 	GameManager * game_manager;
+    QApplication a;
+    ChessGUI w;
 
 public:
 	
@@ -13,15 +16,8 @@ public:
 	Viewer(GameManager*);
 	~Viewer();
 
-	void clear();
-	void reset();
-
-	void render_sf();
-	void render_gf(Team);
-
+    int start();
 	void render_board();
-	void render_game_status(Team);
-
-	Move get_move();
+	void render_main();
 };
 
