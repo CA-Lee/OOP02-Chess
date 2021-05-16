@@ -21,6 +21,7 @@ public:
 	Board board;
 	Viewer viewer;
 	GameSetting setting;
+	Team stage;
 
 	GameManager();
 	~GameManager();

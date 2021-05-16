@@ -3,7 +3,7 @@
 GameManager::GameManager() {
 	players = map<Team, Player*>();
 	viewer = Viewer(this);
-	board = Board();
+	board = Board(this);
 }
 
 GameManager::~GameManager() {
@@ -22,9 +22,9 @@ void GameManager::start_game(GameMode mode) {
 		players[Team::Black] = new HumanPlayer(this, "Player2");
 	}
 
-	Team stage = Team::White;
+	stage = Team::White;
 	while (1) {
-		viewer.render_gf(stage);
+		viewer.render_gf();
 		
 		board.move_piece(players[stage]->OnMove());
 

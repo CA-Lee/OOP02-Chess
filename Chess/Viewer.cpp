@@ -24,11 +24,11 @@ Viewer::~Viewer() {
 
 }
 
-void Viewer::render_gf(Team stage) {
+void Viewer::render_gf() {
 	clear();
 
 	render_board();
-	render_game_status(stage);
+	render_game_status();
 }
 
 void Viewer::render_sf() {
@@ -139,9 +139,9 @@ void Viewer::render_board() {
 	reset();
 }
 
-void Viewer::render_game_status(Team stage) {
+void Viewer::render_game_status() {
 	cout << "It's " 
-		<< (stage == Team::White ? "white" : "black")
+		<< (game_manager->stage == Team::White ? "white" : "black")
 		<< "'s turn" << endl;
 }
 

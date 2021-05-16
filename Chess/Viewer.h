@@ -17,10 +17,10 @@ public:
 	void reset();
 
 	void render_sf();
-	void render_gf(Team);
+	void render_gf();
 
 	void render_board();
-	void render_game_status(Team);
+	void render_game_status();
 
 	Move get_move();
 };

@@ -1,10 +1,13 @@
 #include <cmath>
 #include "Board.h"
+#include "GameManager.h"
 
 using std::max;
 using std::min;
 
-Board::Board() {
+Board::Board(GameManager* gm) {
+
+	game_manager = gm;
 
 	Team team = Team::White;
 
@@ -49,6 +52,7 @@ Piece* Board::at(Position pos) {
 bool Board::validate_move(Move move) {
 	Piece* piece = at(move.from);
 	if (piece == nullptr || move.from == move.to)return false;
+	if (piece->team != game_manager->stage)return false;
 
 
 	if (piece->piece_type==PieceType::Pawn) {

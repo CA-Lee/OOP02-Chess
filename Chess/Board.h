@@ -18,12 +18,16 @@ struct Move
 
 };
 
+class GameManager;
+
 class Board
 {
+	GameManager* game_manager;
 public:
 	map<Team, vector< Piece>> pieces;
 
-	Board();
+	Board() {};
+	Board(GameManager*);
 	
 	Piece* at(Position);
 	void kill(Piece*);
