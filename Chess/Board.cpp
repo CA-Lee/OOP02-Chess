@@ -75,10 +75,12 @@ bool Board::validate_move(Move move) {
 		// eat other
 		if ((piece->team == Team::White &&
 			move.to.row - move.from.row == 1 &&
-			abs(move.to.col - move.from.col) == 1) ||
+			abs(move.to.col - move.from.col) == 1) &&
+			at(move.to) != nullptr ||
 			(piece->team == Team::Black &&
 				move.to.row - move.from.row == -1 &&
-				abs(move.to.col - move.from.col) == 1)
+				abs(move.to.col - move.from.col) == 1 &&
+				at(move.to) != nullptr)
 			)return true;
 		
 		// normal
