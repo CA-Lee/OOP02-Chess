@@ -148,8 +148,14 @@ void Viewer::render_game_status() {
 Move Viewer::get_move() {
 	while (true) {
 		cout << "Enter a move (eg. e3 b3)" << endl;
-		string from, to;
-		cin >> from >> to;
+		string raw, from, to;
+		getline(cin, raw);
+		if (raw.length() != 5) {
+			cout << "Invalid input." << endl;
+			continue;
+		}
+		from = raw.substr(0, 2);
+		to = raw.substr(3, 2);
 		if (from.size() != 2 || to.size() != 2 ||
 			!(from[0] >= 'a' && from[0] <= 'h') ||
 			!(from[1] >= '1' && from[1] <= '8') ||
