@@ -48,6 +48,8 @@ Piece* Board::at(Position pos) {
 
 bool Board::validate_move(Move move) {
 	Piece* piece = at(move.from);
+	if (piece == nullptr || move.from == move.to)return false;
+
 
 	if (piece->piece_type==PieceType::Pawn) {
 

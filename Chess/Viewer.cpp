@@ -32,7 +32,7 @@ void Viewer::render_gf(Team stage) {
 }
 
 void Viewer::render_sf() {
-	cout << "Press Enter to continue.";
+	cout << "Press Enter to start.";
 	string a;
 	getline(cin ,a);
 	game_manager->start_game(GameMode::p2p);
