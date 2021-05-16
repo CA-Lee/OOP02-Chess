@@ -1,4 +1,8 @@
+#include <cmath>
 #include "Board.h"
+
+using std::max;
+using std::min;
 
 Board::Board() {
 
@@ -43,8 +47,142 @@ Piece* Board::at(Position pos) {
 }
 
 bool Board::validate_move(Move move) {
-	//
-	return true;
+	Piece* piece = at(move.from);
+
+	if (piece->piece_type==PieceType::Pawn) {
+
+		// first move
+		if ((piece->team == Team::White && piece->position.row == 2 &&
+			move.from.col == move.to.col && move.to.col == 4 &&
+			at(Position(3, piece->position.col)) == nullptr &&
+			at(Position(4, piece->position.col)) == nullptr
+			) ||
+			(piece->team == Team::Black && piece->position.row == 7 &&
+				move.from.col == move.to.col && move.to.col == 5 &&
+				at(Position(6, piece->position.col)) == nullptr &&
+				at(Position(5, piece->position.col)) == nullptr
+				)
+			) return true;
+		
+		// passant capturing
+		
+		// eat other
+		if ((piece->team == Team::White &&
+			move.to.row - move.from.row == 1 &&
+			abs(move.to.col - move.from.col) == 1) ||
+			(piece->team == Team::Black &&
+				move.to.row - move.from.row == -1 &&
+				abs(move.to.col - move.from.col) == 1)
+			)return true;
+		
+		// normal
+		if ((piece->team == Team::White &&
+			move.from.col == move.to.col &&
+			move.to.row == move.from.row + 1 &&
+			at(move.to) == nullptr) ||
+			(piece->team == Team::Black &&
+				move.from.col == move.to.col &&
+				move.to.row == move.from.row - 1 &&
+				at(move.to) == nullptr))return true;
+	}
+	else if (piece->piece_type == PieceType::Rook) {
+		if (move.from.col == move.to.col) {
+			for (int i = min(move.from.row + 1, move.to.row + 1);
+				i != max(move.to.row, move.from.row);
+				i++
+				) {
+				if (at(Position(i, move.from.col)) != nullptr)return false;
+			}
+			return true;
+		}
+		if (move.from.row == move.to.row) {
+			for (int i = min(move.from.col + 1, move.to.col + 1);
+				i != max(move.to.col, move.from.col);
+				i++
+				) {
+				if (at(Position(move.from.row, i)) != nullptr)return false;
+			}
+			return true;
+		}
+	}
+	else if (piece->piece_type == PieceType::Knight) {
+		if ((abs(move.to.col - move.from.col) == 2 &&
+			abs(move.to.row - move.from.row) == 1) ||
+			(abs(move.to.col - move.from.col) == 1 &&
+				abs(move.to.row - move.from.row) == 2)
+			)return true;
+	}
+	else if (piece->piece_type == PieceType::Bishop) {
+		if (abs(move.to.col - move.from.col) == abs(move.to.row - move.from.row)) {
+			Position start, end;
+			if (move.to.row > move.from.row) {
+				start = move.from;
+				end = move.to;
+			}
+			else {
+				start = move.to;
+				end = move.from;
+			}
+			int col_unit = abs(end.col - start.col) / (end.col - start.col);
+			for (int i = start.row + 1,
+				j = start.col + col_unit;
+				i != end.row;
+				i++, j += col_unit
+				) {
+				if (at(Position(i, j)) != nullptr)return false;
+			}
+			return true;
+		}
+	}
+	else if (piece->piece_type == PieceType::Queen) {
+		if (move.from.col == move.to.col) {
+			for (int i = min(move.from.row + 1, move.to.row + 1);
+				i != max(move.to.row, move.from.row);
+				i++
+				) {
+				if (at(Position(i, move.from.col)) != nullptr)return false;
+			}
+			return true;
+		}
+		if (move.from.row == move.to.row) {
+			for (int i = min(move.from.col + 1, move.to.col + 1);
+				i != max(move.to.col, move.from.col);
+				i++
+				) {
+				if (at(Position(move.from.row, i)) != nullptr)return false;
+			}
+			return true;
+		}
+		if (abs(move.to.col - move.from.col) == abs(move.to.row - move.from.row)) {
+			Position start, end;
+			if (move.to.row > move.from.row) {
+				start = move.from;
+				end = move.to;
+			}
+			else {
+				start = move.to;
+				end = move.from;
+			}
+			int col_unit = abs(end.col - start.col) / (end.col - start.col);
+			for (int i = start.row + 1,
+				j = start.col + col_unit;
+				i != end.row;
+				i++, j += col_unit
+				) {
+				if (at(Position(i, j)) != nullptr)return false;
+			}
+			return true;
+		}
+	}
+	else if (piece->piece_type == PieceType::King) {
+		// castling
+		// normal
+		if (abs(move.to.row - move.from.row) <= 1 &&
+			abs(move.to.col - move.from.col) <= 1
+			)return true;
+	}
+
+	return false;
 }
 
 void Board::move_piece(Move move) {
