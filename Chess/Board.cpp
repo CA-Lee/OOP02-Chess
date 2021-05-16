@@ -59,12 +59,12 @@ bool Board::validate_move(Move move) {
 
 		// first move
 		if ((piece->team == Team::White && piece->position.row == 2 &&
-			move.from.col == move.to.col && move.to.col == 4 &&
+			move.from.col == move.to.col && move.to.row == 4 &&
 			at(Position(3, piece->position.col)) == nullptr &&
 			at(Position(4, piece->position.col)) == nullptr
 			) ||
 			(piece->team == Team::Black && piece->position.row == 7 &&
-				move.from.col == move.to.col && move.to.col == 5 &&
+				move.from.col == move.to.col && move.to.row == 5 &&
 				at(Position(6, piece->position.col)) == nullptr &&
 				at(Position(5, piece->position.col)) == nullptr
 				)
