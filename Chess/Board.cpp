@@ -53,7 +53,8 @@ bool Board::validate_move(Move move) {
 	Piece* piece = at(move.from);
 	if (piece == nullptr || move.from == move.to)return false;
 	if (piece->team != game_manager->stage)return false;
-	if (piece->team == at(move.to)->team)return false;
+	if (at(move.to) != nullptr && piece->team == at(move.to)->team)
+		return false;
 
 
 	if (piece->piece_type==PieceType::Pawn) {
