@@ -190,8 +190,7 @@ PieceType Viewer::ask_promote() {
 	{
 		cout << "Select character to promote to: (QBNR)" << endl;
 		string promote;
-		cin >> promote;
-		fflush(stdin);
+		getline(cin, promote);
 		if (promote.size() == 1) {
 			if (promote == "Q")return PieceType::Queen;
 			if (promote == "B")return PieceType::Bishop;
