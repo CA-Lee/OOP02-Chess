@@ -157,6 +157,7 @@ Move Viewer::get_move() {
 			!(to[1] >= '1' && to[1] <= '8')
 			) {
 			cout << "Invalid input." << endl;
+			continue;
 		}
 
 		Move m(
