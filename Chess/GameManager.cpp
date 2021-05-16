@@ -21,6 +21,8 @@ void GameManager::start() {
 
 void GameManager::start_game(GameMode mode) {
 
+	board = Board(this);
+
 	if (mode == GameMode::p2p) {
 		players[Team::White] = new HumanPlayer(this, "White");
 		players[Team::Black] = new HumanPlayer(this, "Black");
