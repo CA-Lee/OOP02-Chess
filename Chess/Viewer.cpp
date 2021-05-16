@@ -11,6 +11,7 @@ using std::cout;
 using std::endl;
 using std::string;
 using std::getline;
+using std::flush;
 
 Viewer::Viewer() {
 	game_manager = nullptr;
@@ -191,6 +192,7 @@ PieceType Viewer::ask_promote() {
 		cout << "Select character to promote to: (QBNR)" << endl;
 		string promote;
 		cin >> promote;
+		cin.clear();
 		if (promote.size() == 1) {
 			if (promote == "Q")return PieceType::Queen;
 			if (promote == "B")return PieceType::Bishop;
