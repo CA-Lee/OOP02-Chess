@@ -32,18 +32,19 @@ void Viewer::render_gf() {
 }
 
 void Viewer::render_sf() {
-	cout <<
-		" ___________________" << endl <<
-		"< Let's play a game >" << endl <<
-		" -------------------" << endl <<
-		"        \\   ^__^" << endl <<
-		"         \\  (oo)\\_______" << endl <<
-		"            (__)\\       )\\/\\" << endl <<
-		"                ||----w |" << endl <<
-		"                ||     ||" << endl << endl;
+	clear();
+	reset();
+	cout << " ___________________" << endl; Sleep(500);
+	cout << "< Let's play a game >" << endl; Sleep(500);
+	cout << " -------------------" << endl; Sleep(500);
+	cout << "        \\   ^__^" << endl; Sleep(500);
+	cout << "         \\  (oo)\\_______" << endl; Sleep(500);
+	cout << "            (__)\\       )\\/\\" << endl; Sleep(500);
+	cout << "                ||----w |" << endl; Sleep(500);
+	cout << "                ||     ||" << endl << endl; Sleep(500);
 	cout << "Press Enter to start.";
 	string a;
-	getline(cin ,a);
+	getline(cin, a);
 }
 
 void Viewer::render_board() {
@@ -212,8 +213,24 @@ PieceType Viewer::ask_promote() {
 void Viewer::render_ef(Player* winner) {
 	clear();
 	reset();
-	cout << winner->name << " win." << endl
-		<< "Press enter to return to menu.";
+	string s = winner->name + " win.";
+
+	for (int k = 0; k < 3; k++) {
+		for (int i = 0; i < s.size(); i++) {
+			clear();
+			cout << s.substr(0, i);
+			Sleep(100);
+		}
+
+		for (int i = 1; i <= s.size(); i++) {
+			clear();
+			for (int j = 0; j < s.size() - i; j++)cout << " ";
+			cout << s.substr(s.size() - i, i);
+			Sleep(100);
+		}
+	}
+
+	cout << endl << "Press enter to return to menu.";
 	string a;
 	getline(cin, a);
 }
