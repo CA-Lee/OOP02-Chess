@@ -32,6 +32,15 @@ void Viewer::render_gf() {
 }
 
 void Viewer::render_sf() {
+	cout <<
+		" ___________________" << endl <<
+		"< Let's play a game >" << endl <<
+		" -------------------" << endl <<
+		"        \\   ^__^" << endl <<
+		"         \\  (oo)\\_______" << endl <<
+		"            (__)\\       )\\/\\" << endl <<
+		"                ||----w |" << endl <<
+		"                ||     ||" << endl << endl;
 	cout << "Press Enter to start.";
 	string a;
 	getline(cin ,a);
